@@ -6,19 +6,34 @@
 
 {% block content %}
 {{super()}}
+<BODY background="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495368900718&di=adeeabd4118217de4db253bed8e9093e&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2013%2F141%2FS90U9K4010Q5.jpg"> 
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-4 column">
+		</div>
+		<div class="col-md-4 column">
+			
 <h1>Categories List</h1>
 {% if empty %}
 <h1>CategoriesList is empty</h1>
 {% else %}
 <ul>
-	{% for Category in CategoriesList %}
-		<li> {{ Category.name }} </li>
-	{% endfor %}
+{% for Category in CategoriesList %}
+	<li> {{ Category.name }} </li>
+{% endfor %}
 </ul>
 {{ wtf.quick_form(DelForm) }}
 {{ wtf.quick_form(EditForm) }}
 {% endif %}
 {{ wtf.quick_form(AddForm) }}
+
+		</div>
+		<div class="col-md-4 column">
+		</div>
+	</div>
+</div>
+
+
 {% endblock %}
 
 

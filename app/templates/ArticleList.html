@@ -6,9 +6,7 @@
 
 {% block content %}
 {{super()}}
-<BODY background="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1495370583286&di=1bc18e4987b0f5c8e67af442625d20a1&imgtype=0&src=http%3A%2F%2Fimg.kuping.cc%2Fdata%2FImage%2F2012zwj%2F10yue%2F10%2Fqtbz%2F111%2F20121010145739968.jpg"> 
 
-<!--导航条示例-->
 <nav class="navbar navbar-default" role="navigation">
 <div class="container">
 	<div class="row clearfix">
@@ -39,33 +37,42 @@
 				{% endfor %}
 			</ul>
 		</div>
-	</div>
 </div>
 </nav>
-
-
-
-<!--文章列表示例-->
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div class="jumbotron well">
-				<ul>
-					{% for ArticlesIterator in SubCategories.query.filter_by(id = 1).first().sons %}
+		<div class="col-md-4 column">
+			<ul class="nav nav-tabs nav-stacked">
+				{% if Category.sons != [] %}
+					{% for SubCategoriesIterator in Category.sons %}
 						<li>
-							<a href="{{url_for('main.Article', A = ArticlesIterator.id)}}">{{ArticlesIterator.title}}</a>
+					 		<a href="{{url_for('main.ArticleList', C = Category.id, SC = SubCategoriesIterator.id)}}">{{SubCategoriesIterator.name}}</a>
 						</li>
 					{% endfor %}
-				</ul>
+				{% endif %}
+				<li>
+					 <a href="{{ url_for('main.index') }}">返回首页</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-8 column">
+			<div class="container">
+				<div class="row clearfix">
+					<div class="col-md-12 column">
+						<div class="jumbotron well">
+							<ul>
+								{% if SubCategory.sons != [] %}
+									{% for ArticlesIterator in SubCategory.sons %}
+										<li>
+											<a href="{{url_for('main.Article', A = ArticlesIterator.id)}}">{{ArticlesIterator.title}}</a>
+										</li>
+									{% endfor %}
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-
-
-<!--后台入口链接-->
-<a href="{{ url_for('background.CategoriesList') }}">Background</a>
 
 {% endblock %}
 
