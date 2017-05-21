@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}大白CMS后台{% endblock %}
+
+{% block content %}
+{{super()}}
+<h1>EditArticle:{{ArticleId}}</h1>
+<form method="post">
+	<p>
+	{{form.hidden_tag()}}
+        {{form.title()}}
+	{{form.content(class = "ckeditor")}}
+	</p><p>
+	{{form.submit()}}
+	</P>
+</form>
+<div class="span12">
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}大白CMS后台{% endblock %}
+
+{% block content %}
+{{super()}}
+<h1>EditCategory:{{Category.name}}</h1>
+{% if empty %}
+<h1>This Category has no Subcategory</h1>
+{% else %}
+<ul>
+	{% for SubCategory in SubCategoriesList %}
+		<li> {{ SubCategory.name }} </li>
+	{% endfor %}
+</ul>
+{{ wtf.quick_form(DelForm) }}
+{{ wtf.quick_form(EditForm) }}
+{% endif %}
+{{ wtf.quick_form(AddForm) }}
+<a href = '{{url_for('background.CategoriesList')}}'>返回上级菜单</a>
+{% endblock %}
+
+
+
+
+
+

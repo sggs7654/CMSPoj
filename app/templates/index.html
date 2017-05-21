@@ -1,0 +1,17 @@
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}大白研发团队{% endblock %}
+
+{% block content %}
+{{super()}}
+<a href="{{ url_for('background.CategoriesList') }}">CategoriesList</a>
+
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+admin:
+email:1@1.com
+name:admin
+psw:123
+permission:1
+
+normal user:
+email:2@2.com
+name:normaluser
+psw:123
+permission:0
