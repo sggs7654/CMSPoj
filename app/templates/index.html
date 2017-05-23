@@ -22,7 +22,7 @@
 				{% for CategoriesIterator in CategoriesList %}
 					{% if CategoriesIterator.sons == [] %}
 						<li>
-					 		<a href="{{url_for('main.ArticleList', C = CategoriesIterator.id, SC = 'No')}}">{{CategoriesIterator.name}}</a>
+					 		<a href="{{url_for('main.ArticleList', C = CategoriesIterator.id, SC = 'No', A = 'No')}}">{{CategoriesIterator.name}}</a>
 						</li>
 					{% else %}
 						<li class="dropdown pull-right">
@@ -30,7 +30,7 @@
 							<ul class="dropdown-menu">
 								{% for SubCategoriesIterator in CategoriesIterator.sons %}
 									<li>
-							 			<a href="{{url_for('main.ArticleList', C = CategoriesIterator.id, SC = SubCategoriesIterator.id)}}">{{SubCategoriesIterator.name}}</a>
+							 			<a href="{{url_for('main.ArticleList', C = CategoriesIterator.id, SC = SubCategoriesIterator.id, A = 'No')}}">{{SubCategoriesIterator.name}}</a>
 									</li>
 								{% endfor %}
 							</ul>
@@ -51,9 +51,9 @@
 		<div class="col-md-12 column">
 			<div class="jumbotron well">
 				<ul>
-					{% for ArticlesIterator in SubCategories.query.filter_by(id = 1).first().sons %}
+					{% for ArticlesIterator in SubCategories.query.first().sons %}
 						<li>
-							<a href="{{url_for('main.Article', A = ArticlesIterator.id)}}">{{ArticlesIterator.title}}</a>
+							<a href="{{url_for('main.ArticleList', C = ArticlesIterator.father.father.id, SC = ArticlesIterator.father.id, A = ArticlesIterator.id)}}">{{ArticlesIterator.title}}</a>
 						</li>
 					{% endfor %}
 				</ul>

@@ -15,9 +15,13 @@ def index():
         CategoriesIterator = CategoriesIterator, SubCategoriesIterator = SubCategoriesIterator, ArticlesIterator = ArticlesIterator,\
         Categories = Categories, SubCategories = SubCategories, Articles = Articles)
 
-@main.route('/ArticleList/<C>/<SC>', methods=['GET'])
-def ArticleList(C,SC):
+@main.route('/ArticleList/<C>/<SC>/<A>/', methods=['GET'])
+def ArticleList(C,SC,A):
     Category = Categories.query.filter_by(id=C).first()
+    if A == 'No':
+        Article = None
+    else:
+        Article = Articles.query.filter_by(id=A).first()
     if SC != 'No':
         SubCategory = SubCategories.query.filter_by(id=SC).first()
     else:
@@ -28,11 +32,12 @@ def ArticleList(C,SC):
     SubCategoriesIterator = SubCategories.query.first()
     ArticlesList = Articles.query.all()
     ArticlesIterator = Articles.query.first()
-    return render_template('ArticleList.html',Category = Category, SubCategory = SubCategory, \
+    return render_template('ArticleList.html',Category = Category, SubCategory = SubCategory, Article = Article,\
         CategoriesList = CategoriesList, SubCategoriesList = SubCategoriesList, ArticlesList = ArticlesList,\
         CategoriesIterator = CategoriesIterator, SubCategoriesIterator = SubCategoriesIterator, ArticlesIterator = ArticlesIterator,\
         Categories = Categories, SubCategories = SubCategories, Articles = Articles)
 
+'''
 @main.route('/Article/<A>/', methods=['GET'])
 def Article(A):
     Article = Articles.query.filter_by(id=A).first()
@@ -46,3 +51,4 @@ def Article(A):
         CategoriesList = CategoriesList, SubCategoriesList = SubCategoriesList, ArticlesList = ArticlesList,\
         CategoriesIterator = CategoriesIterator, SubCategoriesIterator = SubCategoriesIterator, ArticlesIterator = ArticlesIterator,\
         Categories = Categories, SubCategories = SubCategories, Articles = Articles)
+'''

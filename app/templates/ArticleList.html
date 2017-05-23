@@ -28,7 +28,7 @@
 							<ul class="dropdown-menu">
 								{% for SubCategoriesIterator in CategoriesIterator.sons %}
 									<li>
-							 			<a href="{{url_for('main.ArticleList', C = CategoriesIterator.id, SC = SubCategoriesIterator.id)}}">{{SubCategoriesIterator.name}}</a>
+							 			<a href="{{url_for('main.ArticleList', C = CategoriesIterator.id, SC = SubCategoriesIterator.id, A = 'No')}}">{{SubCategoriesIterator.name}}</a>
 									</li>
 								{% endfor %}
 							</ul>
@@ -44,7 +44,7 @@
 				{% if Category.sons != [] %}
 					{% for SubCategoriesIterator in Category.sons %}
 						<li>
-					 		<a href="{{url_for('main.ArticleList', C = Category.id, SC = SubCategoriesIterator.id)}}">{{SubCategoriesIterator.name}}</a>
+					 		<a href="{{url_for('main.ArticleList', C = Category.id, SC = SubCategoriesIterator.id, A = 'No')}}">{{SubCategoriesIterator.name}}</a>
 						</li>
 					{% endfor %}
 				{% endif %}
@@ -57,17 +57,22 @@
 			<div class="container">
 				<div class="row clearfix">
 					<div class="col-md-12 column">
+						{% if Article == None %}
 						<div class="jumbotron well">
 							<ul>
 								{% if SubCategory.sons != [] %}
 									{% for ArticlesIterator in SubCategory.sons %}
 										<li>
-											<a href="{{url_for('main.Article', A = ArticlesIterator.id)}}">{{ArticlesIterator.title}}</a>
+											<a href="{{url_for('main.ArticleList', C = Category.id, SC = SubCategoriesIterator.id, A = ArticlesIterator.id)}}">{{ArticlesIterator.title}}</a>
 										</li>
 									{% endfor %}
 								{% endif %}
 							</ul>
 						</div>
+						{% else %}
+						<h1>{{Article.title}}</h1>
+						<h3>{{Article.content|safe}}</h3>
+						{% endif %}
 					</div>
 				</div>
 			</div>
