@@ -9,7 +9,7 @@ class Categories(db.Model):
     sons = db.relationship('SubCategories',backref='father')
     
     def __repr__(self):
-        return '<Categories %r>' % self.name
+        return self.name
 
 class SubCategories(db.Model):
     __tablename__='subcategories'
@@ -19,7 +19,7 @@ class SubCategories(db.Model):
     sons = db.relationship('Articles',backref='father')
 
     def __repr__(self):
-        return '<SubCategories %r>' % self.name
+        return self.name
 
 class Articles(db.Model):
     __tablename__='articles'
@@ -30,6 +30,6 @@ class Articles(db.Model):
     father_id = db.Column(db.Integer, db.ForeignKey('subcategories.id'))
 
     def __repr__(self):
-        return '<Articles %r>' % self.title
+        return self.title
 
 

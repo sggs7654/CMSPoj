@@ -11,6 +11,7 @@ def index():
     SubCategoriesIterator = SubCategories.query.first()
     ArticlesList = Articles.query.all()
     ArticlesIterator = Articles.query.first()
+    session['login'] = False
     return render_template('index.html', CategoriesList = CategoriesList, SubCategoriesList = SubCategoriesList, ArticlesList = ArticlesList,\
         CategoriesIterator = CategoriesIterator, SubCategoriesIterator = SubCategoriesIterator, ArticlesIterator = ArticlesIterator,\
         Categories = Categories, SubCategories = SubCategories, Articles = Articles)

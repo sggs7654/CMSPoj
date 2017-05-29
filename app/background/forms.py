@@ -1,9 +1,17 @@
+# -*- coding: utf-8 -*-
 from flask_wtf import FlaskForm
 from flaskckeditor import CKEditor
-from wtforms import StringField, TextAreaField, BooleanField, SelectField, SubmitField, TextAreaField
+from wtforms import StringField, TextAreaField, BooleanField, SelectField, SubmitField, TextAreaField, PasswordField
 from wtforms.validators import Required, Length, Email, Regexp
 from ..import db
 from ..models import Categories, SubCategories, Articles
+
+########################### Auth
+
+class LoginForm(FlaskForm):
+    username = StringField('账号：', validators=[Required()])
+    psw = PasswordField('密码：', validators=[Required()])
+    submit = SubmitField('Log In')
 
 ########################### CATEGORIES
 

@@ -1,11 +1,25 @@
+# -*- coding: utf-8 -*-
 import time
 from flask import render_template, redirect, url_for, abort, flash, session, request, current_app
 from . import background
 from ..import db
 from ..models import Categories,SubCategories,Articles
 from .forms import CategoryDelForm, CategoryAddForm, CategoryEditForm, SubCategoryDelForm, SubCategoryAddForm, SubCategoryEditForm,\
-    ArticleDelForm, ArticleAddForm, ArticleEditForm, TextForm
+    ArticleDelForm, ArticleAddForm, ArticleEditForm, TextForm, LoginForm
 
+
+@background.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        psw = form.psw.data
+        user = form.username.data
+        if psw == 'admin' and user == 'admin':
+            session['login'] = True
+            return redirect(url_for('admin.index'))
+        else:
+            flash('登录失败，用户名或密码错误')
+    return render_template('background/login.html', form=form)
 
 @background.route('/CategoriesList', methods=['GET', 'POST'])
 def CategoriesList():
